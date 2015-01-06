@@ -1,11 +1,11 @@
-FROM ekino/apt-mirror:universe
+FROM ekino/apt-mirror:trusty-universe
 
 MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one
 #ADD fastestmirror.list /etc/apt/sources.list
-ADD mirror.list-multiverse /etc/apt/mirror.list
+ADD mirror.list-trusty-multiverse /etc/apt/mirror.list
 ADD nginx.site-available.mirror-local /etc/nginx/sites-available/mirror.local
 
 RUN apt-get update

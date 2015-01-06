@@ -1,11 +1,11 @@
-FROM ekino/apt-mirror:restricted
+FROM ekino/apt-mirror:trusty-restricted
 
 MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one
 #ADD fastestmirror.list /etc/apt/sources.list
-ADD mirror.list-universe /etc/apt/mirror.list
+ADD mirror.list-trusty-universe /etc/apt/mirror.list
 ADD nginx.site-available.mirror-local /etc/nginx/sites-available/mirror.local
 
 RUN apt-get update

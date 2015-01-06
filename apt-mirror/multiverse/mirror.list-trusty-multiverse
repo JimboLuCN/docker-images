@@ -1,0 +1,11 @@
+set base_path      /mirrors
+set run_postmirror 0
+set nthreads       20
+set _tilde         0
+
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty trusty-main trusty-restricted trusty-universe multiverse
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty-updates trusty-main trusty-restricted trusty-universe multiverse
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty-backports trusty-main trusty-restricted trusty-universe multiverse
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty-security trusty-main trusty-restricted trusty-universe multiverse
+
+clean http://ubuntu-archive.mirrors.proxad.net/ubuntu
