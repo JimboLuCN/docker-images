@@ -11,6 +11,9 @@ red="$(tput setaf 1)"
 reset="$(tput sgr0)"
 wwwpath="/var/www/mirror.local"
 
+version="14.04"
+codename="trusty"
+
 # Install Docker
 ###################################
 
@@ -20,25 +23,25 @@ command -v docker || curl http://get.docker.com/ | sh
 ###################################
 
 cat <<EOF > fastestmirror.list
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe
-deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe
+deb mirror://mirrors.ubuntu.com/mirrors.txt $codename main restricted universe
+deb mirror://mirrors.ubuntu.com/mirrors.txt $codename-updates main restricted universe
+deb mirror://mirrors.ubuntu.com/mirrors.txt $codename-backports main restricted universe
+deb mirror://mirrors.ubuntu.com/mirrors.txt $codename-security main restricted universe
 EOF
 
 # Create source file : mirror.list
 ###################################
 
-cat <<EOF > mirror.list-14.04
+cat <<EOF > mirror.list-$version
 set base_path      /mirrors
 set run_postmirror 0
 set nthreads       20
 set _tilde         0
 
-deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty
-deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty-updates
-deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty-backports
-deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ trusty-security
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ $codename
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ $codename-updates
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ $codename-backports
+deb http://ubuntu-archive.mirrors.proxad.net/ubuntu/ $codename-security
 
 clean http://ubuntu-archive.mirrors.proxad.net/ubuntu
 EOF
@@ -62,14 +65,14 @@ EOF
 ##################################
 
 cat <<EOF > Dockerfile
-FROM ubuntu:14.04
+FROM ubuntu:$version
 
 MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one
 #ADD fastestmirror.list /etc/apt/sources.list
-ADD mirror.list-main /etc/apt/mirror.list
+ADD mirror.list-$codename-main /etc/apt/mirror.list
 ADD nginx.site-available.mirror-local /etc/nginx/sites-available/mirror.local
 
 RUN apt-get update
@@ -93,15 +96,17 @@ EOF
 
 src_namespace=""
 src_imagename="ubuntu:"
-src_imagetag="14.04"
+src_imagetag="$version"
 dst_namespace="ekino/"
 dst_imagename="apt-mirror:"
 for dst_imagetag in main restricted universe multiverse
 do
+  set -x
+  dst_imagerealtag="$codename-$dst_imagetag"
   mkdir -p $dst_imagetag
 
   src="$src_namespace$src_imagename$src_imagetag"
-  dst="$dst_namespace$dst_imagename$dst_imagetag"
+  dst="$dst_namespace$dst_imagename$dst_imagerealtag"
   echo "${cyan}INFO: Start building '$dst' image from '$src'...${reset}"
 
   # add nginx config file
@@ -109,10 +114,10 @@ do
 
   # update mirror.list content
   sed '/^deb /s/$/ '$dst_imagetag'/' mirror.list-$src_imagetag > mirror.list-$dst_imagetag
-  cp mirror.list-$dst_imagetag "$dst_imagetag/"
+  cp mirror.list-$dst_imagetag "$dst_imagetag/mirror.list-$dst_imagerealtag"
 
   # update mirror.list reference inside Dockerfile
-  sed -i '/^ADD mirror.list/s,'$src_imagetag','$dst_imagetag',' Dockerfile
+  sed -i '/^ADD mirror.list/s,'$src_imagetag','$dst_imagerealtag',' Dockerfile
   cp Dockerfile "$dst_imagetag/"
 
   # build
@@ -132,7 +137,7 @@ do
 
   src_namespace=$dst_namespace
   src_imagename=$dst_imagename
-  src_imagetag=$dst_imagetag
+  src_imagetag=$dst_imagerealtag
 
   [ "$dst_imagetag" = "$maxstage" ] && break
 done
@@ -160,7 +165,7 @@ The link alias **must** be the FQDN target of your deb directives inside the con
 Example usage (w/ official ubuntu image):
 ----------------------------------------
 
-    docker run -ti --link ubuntu-mirror:archive.ubuntu.com ubuntu:14.04 /bin/bash
+    docker run -ti --link ubuntu-mirror:archive.ubuntu.com ubuntu:$version /bin/bash
 ${reset}
 "
 fi
