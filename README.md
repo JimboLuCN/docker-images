@@ -1,10 +1,5 @@
-# ekino/puppetlabs
+# Docker Images
 
-## Description
+A public repository of the script made to create Docker images.
 
-This is the [official source]
-(https://github.com/ekino/docker-images/tree/master/puppetlabs)
-of the [ekino/puppetlabs]
-(https://registry.hub.docker.com/u/ekino/puppetlabs/)
-docker image.
-
+Check each subfolder's `README.md` file for details.
