@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER Matthieu Fronton <m@tthieu.fr>
+MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one

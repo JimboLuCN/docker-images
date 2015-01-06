@@ -1,6 +1,6 @@
-FROM frntn/ubuntu-mirror:restricted
+FROM ekino/apt-mirror:restricted
 
-MAINTAINER Matthieu Fronton <m@tthieu.fr>
+MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one

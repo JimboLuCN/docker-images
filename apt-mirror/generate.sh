@@ -64,7 +64,7 @@ EOF
 cat <<EOF > Dockerfile
 FROM ubuntu:14.04
 
-MAINTAINER Matthieu Fronton <m@tthieu.fr>
+MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one
@@ -93,8 +93,8 @@ EOF
 src_namespace=""
 src_imagename="ubuntu:"
 src_imagetag="14.04"
-dst_namespace="frntn/"
-dst_imagename="ubuntu-mirror:"
+dst_namespace="ekino/"
+dst_imagename="apt-mirror:"
 for dst_imagetag in main restricted universe multiverse
 do
   mkdir -p $dst_imagetag

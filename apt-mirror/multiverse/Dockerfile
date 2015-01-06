@@ -1,6 +1,6 @@
-FROM frntn/ubuntu-mirror:universe
+FROM ekino/apt-mirror:universe
 
-MAINTAINER Matthieu Fronton <m@tthieu.fr>
+MAINTAINER Matthieu Fronton <fronton@ekino.com>
 
 # Some mirrors don't have the required packages for mirror
 # So we keep the default one
