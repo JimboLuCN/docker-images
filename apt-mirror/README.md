@@ -23,10 +23,10 @@ Each image is built on top of the previous one following the *de-facto* order
 ## Available Tags
 
 This very first version only contains mirrors for Ubuntu 14.04 :
-    - `trusty-main` - [main/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/main)
-    - `trusty-restricted` - [restricted/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/restricted)
-    - `trusty-universe` - [universe/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/universe)
-    - `trusty-multiverse` - [multiverse/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/multiverse)
+- `trusty-main` - [main/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/main)
+- `trusty-restricted` - [restricted/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/restricted)
+- `trusty-universe` - [universe/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/universe)
+- `trusty-multiverse` - [multiverse/Dockerfile](https://github.com/ekino/docker-images/tree/master/apt-mirror/multiverse)
 
 ## Usage
 
