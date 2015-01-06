@@ -104,6 +104,9 @@ do
   dst="$dst_namespace$dst_imagename$dst_imagetag"
   echo "${cyan}INFO: Start building '$dst' image from '$src'...${reset}"
 
+  # add nginx config file
+  cp nginx.site-available.mirror-local "$dst_imagetag/"
+
   # update mirror.list content
   sed '/^deb /s/$/ '$dst_imagetag'/' mirror.list-$src_imagetag > mirror.list-$dst_imagetag
   cp mirror.list-$dst_imagetag "$dst_imagetag/"
