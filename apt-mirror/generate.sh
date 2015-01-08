@@ -101,7 +101,7 @@ dst_namespace="ekino/"
 dst_imagename="apt-mirror:"
 for dst_imagetag in main restricted universe multiverse
 do
-  set -x
+ set -x
   dst_imagerealtag="$codename-$dst_imagetag"
   mkdir -p $dst_imagetag
 
@@ -113,8 +113,8 @@ do
   cp nginx.site-available.mirror-local "$dst_imagetag/"
 
   # update mirror.list content
-  sed '/^deb /s/$/ '$dst_imagetag'/' mirror.list-$src_imagetag > mirror.list-$dst_imagetag
-  cp mirror.list-$dst_imagetag "$dst_imagetag/mirror.list-$dst_imagerealtag"
+  sed '/^deb /s/$/ '$dst_imagetag'/' mirror.list-$src_imagetag > mirror.list-$dst_imagerealtag
+  cp mirror.list-$dst_imagerealtag "$dst_imagetag/"
 
   # update mirror.list reference inside Dockerfile
   sed -i '/^ADD mirror.list/s,'$src_imagetag','$dst_imagerealtag',' Dockerfile
