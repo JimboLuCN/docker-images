@@ -13,7 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y -o DPkg::Options::=--force-confold
 RUN mkdir -p /var/www/mirror.local
 RUN mkdir -p /mirrors
 RUN apt-mirror
-RUN ln -s /mirrors/mirror/ubuntu-archive.mirrors.proxad.net/ubuntu /var/www/mirror.local/ubuntu
+RUN ln -sf /mirrors/mirror/ubuntu-archive.mirrors.proxad.net/ubuntu /var/www/mirror.local/ubuntu
 RUN sed -i '/^daemon/d' /etc/nginx/nginx.conf
 RUN sed -i '/^worker_processes/a daemon off;' /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
