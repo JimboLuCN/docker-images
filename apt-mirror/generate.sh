@@ -83,7 +83,7 @@ RUN apt-mirror
 RUN ln -s /mirrors/mirror/ubuntu-archive.mirrors.proxad.net/ubuntu $wwwpath/ubuntu
 RUN sed -i '/^daemon/d' /etc/nginx/nginx.conf
 RUN sed -i '/^worker_processes/a daemon off;' /etc/nginx/nginx.conf
-RUN rm /etc/nginx/sites-enabled/default
+RUN rm -f /etc/nginx/sites-enabled/default
 RUN ln -sf /etc/nginx/sites-available/mirror.local /etc/nginx/sites-enabled/
 
 EXPOSE 80
