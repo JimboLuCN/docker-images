@@ -13,7 +13,7 @@ RUN dpkg -i puppetlabs-release-$(lsb_release -cs).deb
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y puppet
 RUN rm puppetlabs-release-$(lsb_release -cs).deb
-RUN [ $(lsb_release -sc) = 'precise' ] && apt-get install rubygems
+RUN apt-get install rubygems
 RUN gem install deep_merge
 
 CMD ["/bin/bash"]
