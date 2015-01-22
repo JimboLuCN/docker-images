@@ -7,13 +7,13 @@ ENV ELASTICSEARCH_VERSION 1.4
 
 # required tools
 RUN apt-get update
-RUN apt-get install -y wget
+RUN apt-get install -y wget supervisor
 
 # install elasticsearch
 RUN wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
 RUN add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main"
 RUN apt-get update
-RUN apt-get install -y elasticsearch openjdk-7-jre-headless supervisor
+RUN apt-get install -y elasticsearch openjdk-7-jre-headless
 
 # cleanup
 RUN apt-get autoremove -y wget
