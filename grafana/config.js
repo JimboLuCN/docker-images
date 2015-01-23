@@ -5,15 +5,15 @@ function (Settings) {
       elasticsearch: {
         type: 'elasticsearch',
         index: 'grafana-dash',
-        url: '<--ELASTICSEARCH_URL-->',
+        url: '',
       },
       influx: {
         type: 'influxdb',
         default: true,
         grafanaDB: true,
-        url: "<--INFLUXDB_URL-->/db/<--DB_NAME-->",
-        username: "<--INFLUXDB_USER-->",
-        password: "<--INFLUXDB_PASS-->",
+        url: "INFLUXDB_URL/db/DB_NAME",
+        username: "INFLUXDB_USER",
+        password: "INFLUXDB_PASS",
       }
     },
     search: {
