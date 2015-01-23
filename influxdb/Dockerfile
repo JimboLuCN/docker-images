@@ -20,7 +20,7 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 # configure
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD supervisord.conf /etc/supervisor/conf.d/influxdb.conf
 
 EXPOSE 8083
 EXPOSE 8086
