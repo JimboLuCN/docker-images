@@ -2,7 +2,7 @@
 
 FROM ubuntu:trusty
 MAINTAINER Matthieu Fronton <fronton@ekino.com>
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 ENV GRAFANA_VERSION 1.9.1
 
 # required tools

@@ -2,7 +2,7 @@
 
 FROM ubuntu:trusty
 MAINTAINER Matthieu Fronton <fronton@ekino.com>
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 ENV KIBANA_VERSION 3.1.0
 
 # required tools
