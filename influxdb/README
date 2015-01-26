@@ -1,0 +1,12 @@
+# ekino/influxdb
+
+## Description
+
+Ekino's influxdb container
+
+## Usage
+
+```bash
+docker build -t=ekino/influxdb:latest .
+docker run -d -P frntn/influxdb:latest
+```

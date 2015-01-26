@@ -1,0 +1,12 @@
+# ekino/kibana
+
+## Description
+
+Ekino's kibana container to be used with ekino/elasticsearch
+
+## Usage
+
+```bash
+docker build -t=ekino/kibana:latest .
+docker run -d -P frntn/kibana:latest
+```

@@ -1,0 +1,12 @@
+# ekino/elasticsearch
+
+## Description
+
+Ekino's ElasticSearch container
+
+## Usage
+
+```bash
+docker build -t=ekino/elasticsearch:latest .
+docker run -d -p 9200:9200 ekino/elasticsearch
+```

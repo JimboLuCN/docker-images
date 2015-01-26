@@ -1,0 +1,12 @@
+# ekino/tomcat
+
+## Description
+
+Ekino's tomcat container
+
+## Usage
+
+```bash
+docker build -t=ekino/tomcat:latest .
+docker run -d -P frntn/tomcat:latest
+```
