@@ -18,7 +18,7 @@ if [ "$SERVER_ID" = "1" ]; then
   sed -i '/^ha.allow_init_cluster/s/false/true/' $CONFIG_FILE
 else
   # Add exlicititely linked container (--link)
-  # let autodiscovery do the rest 
+  # let autodiscovery do the rest
   # (possible since neo4j HA now uses Paxos http://fr.wikipedia.org/wiki/Paxos_(informatique) )
   for i in $(env | grep PORT_5001_TCP_ADDR)
   do
@@ -33,7 +33,7 @@ if [ "$REMOTE_HTTP" = "true" ]; then
   sed -i 's/#\(org.neo4j.server.webserver.address=0.0.0.0\)/\1/' /etc/neo4j/neo4j-server.properties
 fi
 
-if [ "$REMOTE_SHELL" = "true"]; then
+if [ "$REMOTE_SHELL" = "true" ]; then
   sed -i 's/#\(remote_shell_enabled=true\)/\1/' /etc/neo4j/neo4j.properties
 fi
 

@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # required tools
 RUN apt-get update
-RUN apt-get install -y wget
+RUN apt-get install -y wget curl
 
 # install elasticsearch
 RUN wget -O - http://debian.neo4j.org/neotechnology.gpg.key | apt-key add -
@@ -24,8 +24,8 @@ ADD start.sh /start.sh
 ADD supervisord.conf /etc/supervisor/conf.d/neo4j.conf
 ADD neo4j.properties /etc/neo4j/neo4j.properties
 
-ENV REMOTE_HTTP "true"
-ENV REMOTE_SHELL "true"
+ENV REMOTE_HTTP true
+ENV REMOTE_SHELL true
 
 EXPOSE 5001
 EXPOSE 7474

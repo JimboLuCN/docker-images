@@ -2,15 +2,24 @@
 
 ## Init Cluster
 
-Start 1 master, then start each slave with explicit link to the master
-(Auto-discovery will do the rest)
-
-```bash
-docker build -t ekino/neo4j-cluster:latest .
-docker run --name neo1 -d -e SERVER_ID=1 -p 7474:7474     ekino/neo4j-cluster:latest
-docker run --name neo2 -d -e SERVER_ID=2 --link neo1:neo1 ekino/neo4j-cluster:latest
-docker run --name neo3 -d -e SERVER_ID=3 --link neo1:neo1 ekino/neo4j-cluster:latest
 ```
+docker kill $(docker ps | awk 'NR!=1{print $1}')
+docker rm $(docker ps -a| awk 'NR!=1{print $1}')
+docker build -t=ekino/neo4j-cluster:first .
+docker run --name neox -h neox -d -e SERVER_ID=1 -p 7474:7474 -P ekino/neo4j-cluster:first
+docker ps
+
+c=$(docker ps -l | awk 'NR!=1{print $1}')
+docker logs $c
+echo "==> Waiting 10s for Neo4j service to be up & running"
+sleep 10
+docker exec -ti $c curl http://localhost:7474
+```
+
+One line Copy/Paste :
+er kill $(docker ps | awk 'NR!=1{print $1}'); docker rm $(docker ps -a| awk 'NR!=1{print $1}') ; docker build -t=ekino/neo4j-cluster:first . ; docker run --name neox -h neox -d -e SERVER_ID=1 -p 7474:7474 -P ekino/neo4j-cluster:first; docker ps ; c=$(docker ps -l | awk 'NR!=1{print $1}') ; docker logs $c ; echo "==> Waiting 10s for Neo4j service to be up & running" ; sleep 10 ; docker exec -ti $c curl http://localhost:7474
+```
+
 
 ## Usage
 
