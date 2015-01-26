@@ -19,23 +19,14 @@ if [ "$SERVER_ID" = "1" ]; then
   # All this node to init the cluster all alone (initial_hosts=127.0.0.1)
   sed -i '/^ha.allow_init_cluster/s/false/true/' $CONFIG_FILE
 else
-  # Add exlicititely linked container (--link)
-  # let autodiscovery do the rest
-  # (possible since neo4j HA now uses Paxos http://fr.wikipedia.org/wiki/Paxos_(informatique) )
-  for i in $(env | grep PORT_5001_TCP_ADDR)
-  do
-    nodename=${i,,}
-    sed -i '/^ha.initial_hosts/s/$/,'${nodename%%_*}':5001/' $CONFIG_FILE
-  done
-
-  # TODO: allow remote neo4j container (use ENVs instead of links...)
   OIFS=$IFS
   if [ ! -z "$CLUSTER_NODES" ]; then
     IFS=','
     for i in $CLUSTER_NODES
     do
-      sed -i '/^ha.initial_hosts/s/$/,'${i%%_*}':5001/' $CONFIG_FILE
+      sed -i '/^ha.initial_hosts/s/$/'${i%%_*}':5001,/' $CONFIG_FILE
     done
+    sed -i '/^ha.initial_hosts/s/,$//' $CONFIG_FILE
   fi
   IFS=$OIFS
 fi
