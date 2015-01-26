@@ -33,8 +33,10 @@ do
       docker exec neodns supervisorctl restart dnsmasq
 
       # Wait.. and check last started node
-      echo "==> Waiting 10s for cluster to start"
-      sleep 10
+      w=15
+      echo "==> Waiting ${w}s for cluster to start"
+      sleep $w
+      set -x
       docker exec -ti $(docker ps -l | awk 'NR!=1{print $1}') curl http://localhost:7474
       ;;
     'clear')
