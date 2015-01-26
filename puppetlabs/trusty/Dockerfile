@@ -1,8 +1,6 @@
-# --- PUPPETLABS ---
-
 FROM ubuntu:trusty
+
 MAINTAINER Matthieu Fronton <fronton@ekino.com>
-ENV DEBIAN_FRONTEND noninteractive
 
 #ADD fastestmirror.list /etc/apt/sources.list
 
