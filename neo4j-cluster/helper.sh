@@ -22,10 +22,14 @@ do
       for i in $(seq 1 ${1#*:})
       do
         # Create new cluster node
+        echo "--> Run node 'neo$i'"
         docker run --name neo$i -h neo$i --dns $localdns -e SERVER_ID=$i -P -d ekino/neo4j-cluster:latest
         # Add new node to DNS server
-        newhost=$(docker inspect --format {{.Config.Hostname}} `docker ps -l | awk 'NR!=1{print $1}'`)
-        echo "host-record=$newhost,$(docker inspect --format {{.NetworkSettings.IPAddress}} $newhost)" | tee $cnf/50_docker_$newhost
+        echo "--> Register node 'neo$i'"
+        echo "host-record=neo$i,$(docker inspect --format {{.NetworkSettings.IPAddress}} neo$i)" | tee $cnf/50_docker_neo$i
+        # Verify main settings
+        echo "--> Verify main settings for 'neo$i'"
+        docker logs neo$i
       done
 
       # Restart DNS server to register new nodes
@@ -33,8 +37,8 @@ do
       docker exec neodns supervisorctl restart dnsmasq
 
       # Wait.. and check last started node
-      w=15
-      echo "==> Waiting ${w}s for cluster to start"
+      w=45
+      echo "==> Waiting ${w}s (cluster warmup)"
       sleep $w
       set -x
       docker exec -ti $(docker ps -l | awk 'NR!=1{print $1}') curl http://localhost:7474
