@@ -17,7 +17,7 @@ codename="trusty"
 # Install Docker
 ###################################
 
-command -v docker || curl http://get.docker.com/ | sh
+command -v docker || curl https://get.docker.com/ | sh
 
 # Create source file : source.list
 ###################################
